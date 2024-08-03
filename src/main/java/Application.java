@@ -19,11 +19,10 @@ public class Application {
                 player.receiveCard(game.getDeck().dealCard());
                 System.out.println(player.getName() + " 카드: " + ResultView.formatCards(player.getCards()));
             }
-            System.out.println();
         }
 
         game.play();
         ResultView.showFinalResults(game.getDealer(), game.getPlayers());
-        ResultView.showFinalOutcome(game.getDealer(), game.getPlayers());
+        ResultView.showFinalOutcome(game);
     }
 }

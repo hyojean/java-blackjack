@@ -54,4 +54,24 @@ public class Game {
             dealer.receiveCard(deck.dealCard());
         }
     }
+
+    public int calculateProfit(Player player) {
+        int playerValue = player.getCardsValue();
+        int dealerValue = dealer.getCardsValue();
+        int betAmount = player.getBetAmount();
+
+        if (player.isBlackjack() && !dealer.isBlackjack()) {
+            return (int) (betAmount * 1.5);
+        } else if (player.isBlackjack() && dealer.isBlackjack()) {
+            return 0;
+        } else if (playerValue > 21) {
+            return -betAmount;
+        } else if (dealerValue > 21 || playerValue > dealerValue) {
+            return betAmount;
+        } else if (playerValue == dealerValue) {
+            return 0;
+        } else {
+            return -betAmount;
+        }
+    }
 }

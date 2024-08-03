@@ -2,6 +2,7 @@ package view;
 
 import model.Card;
 import model.Dealer;
+import model.Game;
 import model.Player;
 
 import java.util.List;
@@ -38,29 +39,21 @@ public class ResultView {
         return sb.toString();
     }
 
-    public static void showFinalOutcome(Dealer dealer, List<Player> players) {
-        int dealerWins = 0;
-        int dealerLosses = 0;
-        int dealerValue = dealer.getCardsValue();
+    public static void showFinalOutcome(Game game) {
+        Dealer dealer = game.getDealer();
+        List<Player> players = game.getPlayers();
 
+        int dealerProfit = 0;
         for (Player player : players) {
-            int playerValue = player.getCardsValue();
-            if (playerValue > 21 || (dealerValue <= 21 && dealerValue >= playerValue)) {
-                dealerWins++;
-            } else {
-                dealerLosses++;
-            }
+            int profit = game.calculateProfit(player);
+            dealerProfit -= profit;
         }
 
-        System.out.println("## 최종 승패");
-        System.out.println("딜러: " + dealerWins + "승 " + dealerLosses + "패");
+        System.out.println("## 최종 수익");
+        System.out.println("딜러: " + dealerProfit);
         for (Player player : players) {
-            int playerValue = player.getCardsValue();
-            if (playerValue > 21 || (dealerValue <= 21 && dealerValue >= playerValue)) {
-                System.out.println(player.getName() + ": 패");
-            } else {
-                System.out.println(player.getName() + ": 승");
-            }
+            int profit = game.calculateProfit(player);
+            System.out.println(player.getName() + ": " + profit);
         }
     }
 }
