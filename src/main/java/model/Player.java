@@ -5,15 +5,21 @@ import java.util.List;
 
 public class Player {
     private String name;
+    private int betAmount;
     private List<Card> cards;
 
-    public Player(String name) {
+    public Player(String name, int betAmount) {
         this.name = name;
+        this.betAmount = betAmount;
         this.cards = new ArrayList<>();
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getBetAmount() {
+        return betAmount;
     }
 
     public void receiveCard(Card card) {
@@ -42,5 +48,9 @@ public class Player {
 
     public boolean wantsCard() {
         return false;
+    }
+
+    public boolean isBlackjack() {
+        return cards.size() == 2 && getCardsValue() == 21;
     }
 }

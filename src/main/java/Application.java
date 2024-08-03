@@ -10,7 +10,7 @@ public class Application {
     public static void main(String[] args) {
         String[] playerNames = InputView.getPlayerNames();
         List<Integer> betAmounts = InputView.getBetAmounts(playerNames);
-        Game game = new Game(Arrays.asList(playerNames));
+        Game game = new Game(Arrays.asList(playerNames), betAmounts);
         game.start();
         ResultView.showInitialCards(game.getDealer(), game.getPlayers());
 

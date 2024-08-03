@@ -8,14 +8,17 @@ public class Game {
     private List<Player> players;
     private Deck deck;
 
-    public Game(List<String> playerNames) {
+    public Game(List<String> playerNames, List<Integer> betAmounts) {
         if (playerNames == null || playerNames.isEmpty()) {
-            throw new IllegalArgumentException("Player names cannot be null or empty");
+            throw new IllegalArgumentException("플레이어 이름은 null이 될 수 없습니다.");
+        }
+        if (playerNames.size() != betAmounts.size()) {
+            throw new IllegalArgumentException("플레이어 이름의 개수와 배팅금의 개수는 같아야 합니다.");
         }
         dealer = new Dealer();
         players = new ArrayList<>();
-        for (String name : playerNames) {
-            players.add(new Player(name));
+        for (int i = 0; i < playerNames.size(); i++) {
+            players.add(new Player(playerNames.get(i), betAmounts.get(i)));
         }
         deck = new Deck();
     }
