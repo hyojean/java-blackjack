@@ -4,10 +4,12 @@ import view.InputView;
 import view.ResultView;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
         String[] playerNames = InputView.getPlayerNames();
+        List<Integer> betAmounts = InputView.getBetAmounts(playerNames);
         Game game = new Game(Arrays.asList(playerNames));
         game.start();
         ResultView.showInitialCards(game.getDealer(), game.getPlayers());
